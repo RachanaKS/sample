@@ -1,0 +1,13 @@
+name: sample
+  on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  jobs:
+  setup-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: service-starter
+    environment: e2e
