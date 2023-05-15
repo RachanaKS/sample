@@ -1,1 +1,18 @@
-bbb
+name: workflow2
+on:
+  workflow_call:
+    inputs:
+      ip_address:
+        required: true
+        type: string
+jobs:
+  sanity:
+   runs-on: ubuntu-latest
+   steps:
+        # checkout the repo
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@v3
+          
+        - name: printing ip_address
+          run: |
+           echo "IP address is present ${{inputs.ip_address }}" 
