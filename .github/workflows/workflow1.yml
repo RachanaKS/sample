@@ -1,0 +1,28 @@
+name: workflow1
+on:
+  workflow_dispatch:
+    inputs:
+     ip_address:
+        description: "Please enter the ip_address"
+        type: string
+jobs:
+   setup-test:
+    runs-on: ubuntu-latest
+    environment: e2e
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: taking the ip_addr
+        run: |
+          echo "IP address is present ${{inputs.ip_address }}" 
+          echo "${{inputs.ip_address }}" > .vm_ip_addr
+        
+      - name: taking the ip_addr
+        id: ip_address
+        run: echo "::set-output name=ip_address::$(cat .vm_ip_addr)"
+     
+       
+ 
+    
