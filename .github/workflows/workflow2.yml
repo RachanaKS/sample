@@ -7,11 +7,12 @@ on:
         type: string
 jobs:
   sanity:
-   runs-on: ubuntu-latest
-   steps:
-        - name: 'Checkout GitHub Action'
-          uses: actions/checkout@v3
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v3
           
-        - name: printing ip_address
-          run: |
-           echo "IP address is present ${{inputs.ip_address }}" 
+      - name: printing ip_address
+        run: |
+          echo "IP address is present ${{inputs.ip_address }}" 
+
