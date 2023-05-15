@@ -1,12 +1,14 @@
 name: workflow1
+
 on:
   workflow_dispatch:
     inputs:
-     ip_address:
-        description: "Please enter the ip_address"
+      ip_address:
+        description: "Please enter the IP address"
         type: string
+
 jobs:
-   setup-test:
+  setup-test:
     runs-on: ubuntu-latest
     environment: e2e
     
@@ -14,14 +16,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: taking the ip_addr
+      - name: Save IP address
         run: |
           echo "IP address is present ${{inputs.ip_address }}" 
           echo "${{inputs.ip_address }}" > .vm_ip_addr
         
-      - name: taking the ip_addr
+      - name: Set output variable
         id: ip_address
         run: echo "::set-output name=ip_address::$(cat .vm_ip_addr)"
+
+  call-another-workflow:
+    needs: setup-test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Call another workflow
+        uses: RachanaKS/sample/.github/workflows/workflow2.yml@main
+        with:
+          ip_address: ${{ needs.setup-test.outputs.ip_address }}
+
+      
      
        
  
